@@ -2,7 +2,7 @@
 ![demo gif](/asset/demo.gif)
 
 ## Overview
-The transaction broadcasting and monitoring client which build into console application which separate following hexagonal architecture, which benefit for make modifying and testing easier.
+Transaction Broadcasting and Monitoring Client, This tool is a console application that follows a design called hexagonal architecture. This design helps keep everything organized so it's easier to change things and test them without confusion. Basically, it helps you send out transactions and watch what happens to them, all through a user-friendly console. It's built to be straightforward and reliable, perfect for getting your transactions handled smoothly. Let's dive in and see how it works.
 
 ## Features
 - **Broadcast**: send HTTP request with `POST` method for make a transaction with the server and store the `TxHash` into `sqlite` database.
