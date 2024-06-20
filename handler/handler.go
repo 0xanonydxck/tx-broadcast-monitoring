@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 	"tx-monitoring/config"
 	"tx-monitoring/domain"
@@ -78,11 +79,18 @@ func (h *handler) Broadcast() {
 		choices[i] = fmt.Sprintf("%v - %v", symbol.Symbol, symbol.Price)
 	}
 
-	symbol, err := prompt.New().Ask("Choose Symbol").Choose(choices)
+	symbolWithPrice, err := prompt.New().Ask("Choose Symbol").Choose(choices)
 	if err != nil {
 		log.Panic().Err(err).Msg("Handler::Broadcast(): failed to retrieve answer")
 	}
-	req.Symbol = symbol
+
+	parts := strings.Split(symbolWithPrice, " - ")
+	fmt.Println(parts)
+	req.Symbol = strings.TrimSpace(parts[0])
+	symbolPrice, err := strconv.ParseFloat(strings.TrimSpace(parts[1]), 64)
+	if err != nil {
+		log.Panic().Err(err).Msg("Handler::Broadcast(): failed to parse price")
+	}
 
 	priceStr, err := prompt.New().Ask("Enter Price (uint)").
 		Input("1",
@@ -91,6 +99,16 @@ func (h *handler) Broadcast() {
 				if err := h.validator.Var(s, "required,gt=0"); err != nil {
 					return err
 				}
+
+				inputPrice, err := strconv.ParseFloat(s, 64)
+				if err != nil {
+					return err
+				}
+
+				if inputPrice < symbolPrice {
+					return fmt.Errorf("price must be greater than or equal to %v", symbolPrice)
+				}
+
 				return nil
 			}))
 
