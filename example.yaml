@@ -1,0 +1,8 @@
+binance:
+  url: https://testnet.binance.vision/api # binance api url
+  api_key: KsjQtk5UH6nXIzaZo5mYORAgLbPXxJgr40pQ¡h×9HdeSN7fnShfYk4yFcqHC1bUo # binance api key
+  secret_key: nT04uwYxeRKXCNB3MTQm6AIbS71H0TFEtlAwIpHMWOJM7MMyzT31bGnkTUKmST # binance secret key
+
+broadcast:
+  url: https://mock-node-wgqbnxruha-as.a.run.app # broadcast url
+  check_status_interval: 10 # seconds

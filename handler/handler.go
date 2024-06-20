@@ -138,8 +138,7 @@ func (h *handler) ShowTransactions() {
 
 func (h *handler) CheckTransaction() {
 	conf := config.Get().Broadcast
-	tz, _ := time.LoadLocation("Asia/Bangkok")
-	scheduler := gocron.NewScheduler(tz)
+	scheduler := gocron.NewScheduler(time.Local)
 	scheduler.Every(conf.CheckStatusInterval).Seconds().Do(h.service.CheckTxPending)
 	scheduler.StartAsync()
 }

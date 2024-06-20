@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"tx-monitoring/adapter"
 	"tx-monitoring/config"
 	"tx-monitoring/domain"
@@ -8,6 +9,11 @@ import (
 	"tx-monitoring/infra"
 	"tx-monitoring/logger"
 )
+
+func init() {
+	local, _ := time.LoadLocation("Asia/Bangkok")
+	time.Local = local
+}
 
 func init() {
 	logger.Init()
