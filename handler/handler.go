@@ -85,7 +85,6 @@ func (h *handler) Broadcast() {
 	}
 
 	parts := strings.Split(symbolWithPrice, " - ")
-	fmt.Println(parts)
 	req.Symbol = strings.TrimSpace(parts[0])
 	symbolPrice, err := strconv.ParseFloat(strings.TrimSpace(parts[1]), 64)
 	if err != nil {
